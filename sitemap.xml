@@ -1,11 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>
+            http://oylbin.github.com/blog/2012/10/28/create-a-blog-on-github-with-octopress/
+        </loc>
+        <lastmod>2012-10-28T22:04:05+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://oylbin.github.com/blog/archives/</loc>
-        <lastmod>2012-10-28T21:19:34+08:00</lastmod>
+        <lastmod>2012-10-28T22:04:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://oylbin.github.com/</loc>
-        <lastmod>2012-10-28T21:19:34+08:00</lastmod>
+        <lastmod>2012-10-28T22:04:05+08:00</lastmod>
     </url>
 </urlset>
