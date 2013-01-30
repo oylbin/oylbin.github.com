@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tip | My Octopress Blog]]></title>
+  <link href="http://oylbin.github.com/blog/categories/tip/atom.xml" rel="self"/>
+  <link href="http://oylbin.github.com/"/>
+  <updated>2012-10-29T15:23:04+08:00</updated>
+  <id>http://oylbin.github.com/</id>
+  <author>
+    <name><![CDATA[oylbin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[shell tips]]></title>
+    <link href="http://oylbin.github.com/blog/2012/10/29/shell-tips/"/>
+    <updated>2012-10-29T14:57:00+08:00</updated>
+    <id>http://oylbin.github.com/blog/2012/10/29/shell-tips</id>
+    <content type="html"><![CDATA[<h1>shell(bash)</h1>
+
+<ul>
+<li><p>脚本所在的路径</p>
+
+<pre><code>  SCRIPTDIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" &amp;&amp; pwd )"
+</code></pre></li>
+<li><p>生成随机密码</p>
+
+<pre><code>  cat /dev/urandom|tr -dc "a-zA-Z0-9-_."|fold -w 12 | head -n 1
+</code></pre></li>
+<li><p>取一个 ( (变量名是变量) 的变量) 的值，嗯有点绕</p>
+
+<pre><code>  varname='abc'
+  # 相当于 value=$abc
+  value=${!varname}
+</code></pre></li>
+<li><p>取字符串长度</p>
+
+<pre><code>  length_of_str_var=${#str_var}
+</code></pre></li>
+<li><p>substring</p>
+
+<pre><code>  b=${a:12:5}
+</code></pre></li>
+<li><p>取后缀名</p>
+
+<pre><code>  ~% FILE="example.tar.gz"
+  ~% echo "${FILE%%.*}"
+  example
+  ~% echo "${FILE%.*}"
+  example.tar
+  ~% echo "${FILE#*.}"
+  tar.gz
+  ~% echo "${FILE##*.}"
+  gz
+</code></pre></li>
+<li><p>輸出一個多行的字符串，將多行的字符串賦值給變量</p>
+
+<pre><code>  cat &lt;&lt;EOF
+  mkdir -p $dest &amp;&amp; unzip -q -o -d $dest \$1
+  echo "OK"
+  EOF
+
+  vvv=$(cat &lt;&lt;EOF
+  mkdir -p $dest &amp;&amp; unzip -q -o -d $dest \$1
+  echo "OK"
+  EOF)
+</code></pre></li>
+<li><p>使用find命令时自动忽略指定的目录（<a href="http://stackoverflow.com/a/4210072">参考</a>）</p>
+
+<pre><code>  # 查找当前目录下所有的lua文件，并且忽略 znum, tests, .git 目录
+  find .  -type d \( -name znum -o -name tests -o -name .git \) -prune  -o -iname '*.lua' -print
+</code></pre></li>
+<li><p>将一个命令的输出重定向到<code>while read line</code>循环</p>
+
+<p>  有时候需要逐行处理一个命令的输出，因为每行输出里面有空格，所以不能用下面的for循环</p>
+
+<pre><code>  for i in $( grep 'require' a.lua )
+  do
+      ...
+  done
+</code></pre>
+
+<p>  有一种方式是</p>
+
+<pre><code>  some command &gt; a.tmp
+  while read line 
+  do
+      ...
+  done &lt; a.tmp
+  rm a.tmp
+</code></pre>
+
+<p>  这样会产生一个临时文件，总归不太爽，直接使用重定向的写法如下（<a href="http://fvue.nl/wiki/Bash:_Piped_%60while-read'_loop_starts_subshell">参考</a>），需要将命令用括号包起来构成一个sub shell：</p>
+
+<pre><code>  while read line
+  do
+      ...
+  done &lt; &lt;( grep 'require' a.lua ) # 注意两个箭头之间有空格
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
